@@ -1,0 +1,22 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Le Petit Prince",
+      "author": "Antoine de Saint-Exupéry",
+      "genre": "Philosophique, Aventure",
+      "cover": "https://example.com/images/le-petit-prince.jpg",
+      "status": "à lire",
+      "addedDate": "2024-11-01"
+    },
+    {
+      "id": 2,
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Science-fiction, Dystopie",
+      "cover": "https://example.com/images/1984.jpg",
+      "status": "lu",
+      "addedDate": "2024-10-10"
+    }
+  ]
+}

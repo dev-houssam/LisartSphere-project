@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionnaire de livres</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li style="background-color: purple; text-shadow: 45PX purple;"><a href="#" onclick="switchTab('accueil')">LISARTSPHERE</a></li>
+          <li><a href="#" onclick="switchTab('bibliotheque')">Bibliothèque</a></li>
+          <li><a href="#" onclick="switchTab('challenge')">Challenge de Lecture</a></li>
+          <li><a href="#" onclick="switchTab('organisation')">Rangement</a></li>
+          
+          <li><a href="#" onclick="switchTab('citations')">Citations préférées</a></li>
+          <li><a href="#" onclick="switchTab('club')">Club de lecture</a></li>
+          <li><a href="#" onclick="switchTab('profil')">Profil utilisateur</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="main-content">
+      <header>
+       
+      </header>
+
+      <div class="content-section" id="accueil">
+        <main id="main-home">
+            <div class="hero">
+              <h1 class="logo">LISARTSPHERE</h1>
+              <p class="tagline">Explorez, Découvrez, Inspirez-vous ! </p>
+              <p class="tagline">Voici ! Le sommet de la lecture ; se cultiver de manière sure ! </p>
+            </div>
+            <div class="features">
+              <div class="feature">
+                <i class="fas fa-book"></i>
+                <h2>Vaste Collection</h2>
+                <p>Des milliers de livres à portée de main</p>
+              </div>
+              <div class="feature">
+                <i class="fas fa-paint-brush"></i>
+                <h2>Challenge</h2>
+                <p>L'amusement au rendez-vous</p>
+              </div>
+              <div class="feature">
+                <i class="fas fa-users"></i>
+                <h2>Club de Lecture</h2>
+                <p>Partagez vos passions littéraires</p>
+              </div>
+            </div>
+            <button class="cta-button" onclick="switchTab('bibliotheque')">Commencer l'aventure</button>
+      </div>
+
+          
+         
+     
+
+      <!-- Content Sections -->
+      <div class="content-section" id="bibliotheque">
+        <h2>LisArtSphere</h2>
+        <section class="book-grid" id="book-grid">
+            <!-- Books will be displayed here -->
+          </section>
+      </div>
+      
+      <div class="content-section" id="challenge">
+          <h2>Challenge de Lecture</h2>
+          
+          <hr>
+        <h3>Challenge #1 : Chronomètre</h3>
+        <div id="timer">
+          <p>Temps écoulé : <span id="time">00:00</span></p>
+          <button id="startStopBtn">Démarrer</button>
+          <button id="resetBtn">Réinitialiser</button>
+        </div>
+
+        <div>
+            <hr>
+            <iframe src="lecteur.html?LeLivre=monlivre" frameborder="0" style="width: 100%; height: 600px;"></iframe>
+        </div>
+
+
+
+      </div>
+      <div class="content-section" id="organisation">
+        <h2>Rangement</h2>
+        <p>Contenu à mettre en ordre</p>
+        <section class="book-grid" id="book-grid-organisation">
+          <!-- Books will be displayed here -->
+        </section>
+      </div>
+      
+      <div class="content-section" id="citations">
+        <h2>Citations préférées</h2>
+        <p>Contenu pour les citations...</p>
+        <section class="book-grid" id="book-grid-citations">
+          <!-- Books will be displayed here -->
+        </section>
+      </div>
+      <div class="content-section" id="club">
+        <h2>Club de lecture</h2>
+        <p>Contenu pour le club...</p>
+        <section class="book-grid" id="book-grid-club">
+          <!-- Books will be displayed here -->
+        </section>
+      </div>
+      <!-- PROFIL -->
+      <div class="content-section" id="profil">
+        <h2>Profil utilisateur</h2>
+        <p><hr>
+
+        <div class="user-profile">
+          <img src="https://via.placeholder.com/200x300?text=USER" alt="Photo de Profil" class="profile-photo">
+          <h2 class="user-name">Houssam BACAR</h2>
+          <p class="user-bio">Passionné de lecture et d'art. Toujours à la recherche de nouvelles aventures littéraires.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </p>
+        
+
+
+
+      </div>
+    </main>
+  </div>
+
+
+  <script>
+    let isRunning = false;
+    let time = 0;
+    let timerInterval;
+  
+    const startStopBtn = document.getElementById('startStopBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const timeDisplay = document.getElementById('time');
+  
+    // Fonction de mise à jour du chronomètre
+    function updateTimer() {
+      time++;
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      timeDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+  
+    // Démarrer/arrêter le chronomètre
+    startStopBtn.addEventListener('click', () => {
+      if (isRunning) {
+        clearInterval(timerInterval);
+        startStopBtn.textContent = 'Démarrer';
+      } else {
+        timerInterval = setInterval(updateTimer, 1000);
+        startStopBtn.textContent = 'Arrêter';
+      }
+      isRunning = !isRunning;
+    });
+  
+    // Réinitialiser le chronomètre
+    resetBtn.addEventListener('click', () => {
+      clearInterval(timerInterval);
+      time = 0;
+      timeDisplay.textContent = '00:00';
+      startStopBtn.textContent = 'Démarrer';
+      isRunning = false;
+    });
+  </script>
+
+<script src="scripts.js"></script>
+
+
+  <script>
+    // Fonction pour gérer les onglets
+    function switchTab(tabId) {
+      // Masquer toutes les sections
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      // Afficher la section correspondante
+      const activeTab = document.getElementById(tabId);
+      if (activeTab) {
+        activeTab.classList.add('active');
+      }
+
+      // Mettre à jour l'apparence des onglets
+      const tabs = document.querySelectorAll('.tabs a');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      const activeLink = document.getElementById('tab-' + tabId);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+    }
+
+    // Filter and search function
+  function searchBooks() {
+    const searchTerm = document.getElementById("search-bar").value.toLowerCase();
+    const genreFilter = /*document.getElementById("genre-filter").value ||*/ "";
+    const statusFilter = /*document.getElementById("status-filter").value ||*/ "";
+  
+    const filteredBooks = books.filter(book => {
+      const matchesSearch = book.title.toLowerCase().includes(searchTerm) || book.author.toLowerCase().includes(searchTerm);
+      const matchesGenre = genreFilter ? book.genre === genreFilter : true;
+      const matchesStatus = statusFilter ? book.status === statusFilter : true;
+  
+      return matchesSearch && matchesGenre && matchesStatus;
+    });
+  
+    renderBooks("book-grid", filteredBooks);
+  }
+  
+
+    // Initialisation de l'onglet "Chapitre" au démarrage
+    switchTab('chapitre');
+
+
+
+
+    // Example list of books
+
+  // Function to render books in the grid
+  function renderBooks(support, filteredBooks) {
+    const bookGrid = document.getElementById(support);
+    bookGrid.innerHTML = ""; // Clear existing books
+  
+    filteredBooks.forEach(book => {
+      const bookCard = document.createElement("div");
+      bookCard.classList.add("book-card");
+  
+      bookCard.innerHTML = `
+        <img src="${book.img}" alt="${book.title}">
+        <div class="book-info">
+          <h3>${book.title}</h3>
+          <p>${book.author}</p>
+        </div>
+      `;
+  
+      bookGrid.appendChild(bookCard);
+    });
+  }
+
+  function renderOrganisations(support, filteredBooks) {
+    const bookGrid = document.getElementById(support);
+    bookGrid.innerHTML = ""; // Clear existing books
+    let i = 0;
+    filteredBooks.forEach(book => {
+      const bookCard = document.createElement("div");
+      bookCard.classList.add("book-card");
+      i += 1;
+      bookCard.innerHTML = `
+        <img src="${book.img}" alt="${book.title}">
+        <div class="book-info">
+          <h3>Placement #${i} : ${book.title}</h3>
+          <p>${book.author}<br>:::Deplacer:::</p>
+        </div>
+      `;
+  
+      bookGrid.appendChild(bookCard);
+    });
+  }
+
+  function renderCitations(support, filteredBooks) {
+    const bookGrid = document.getElementById(support);
+    bookGrid.innerHTML = ""; // Clear existing books
+  
+    filteredBooks.forEach(book => {
+      const bookCard = document.createElement("div");
+      bookCard.classList.add("book-card");
+  
+      bookCard.innerHTML = `
+        <img src="${book.img}" alt="${book.title}">
+        <div class="book-info">
+          <h3>${book.title}</h3>
+          <p>Que la paix soit avec toi, et que...</p>
+        </div>
+      `;
+  
+      bookGrid.appendChild(bookCard);
+    });
+  }
+
+  function renderClub(support, filteredBooks) {
+    const bookGrid = document.getElementById(support);
+    bookGrid.innerHTML = ""; // Clear existing books
+  
+    filteredBooks.forEach(book => {
+      const bookCard = document.createElement("div");
+      bookCard.classList.add("book-card");
+  
+      bookCard.innerHTML = `
+        <img src="${book.img}" alt="${book.title}">
+        <div class="book-info" style="width: 70%;">
+          <h3>Club du ${book.title} en 2024</h3>
+          <p>Lorem Ipsum dolor et tres dolor</p>
+        </div>
+      `;
+  
+      bookGrid.appendChild(bookCard);
+    });
+  }
+  
+  function renderResume(support, filteredBooks) {
+    const bookGrid = document.getElementById(support);
+    bookGrid.innerHTML = ""; // Clear existing books
+  
+    filteredBooks.forEach(book => {
+      const bookCard = document.createElement("div");
+      bookCard.classList.add("book-card");
+  
+      bookCard.innerHTML = `
+        <img src="${book.img}" alt="${book.title}">
+        <div class="book-info" style="width: 70%;">
+          <h3>Resumé du : ${book.title} </h3>
+          <p>Alors que les enfants de la route binaire shifteraient des valeurs entieres, Houssam lui...</p>
+        </div>
+      `;
+  
+      bookGrid.appendChild(bookCard);
+    });
+  }
+  
+  
+  // Initial render of books de la bibilotheque
+  renderBooks("book-grid", books);
+  renderOrganisations("book-grid-organisation", books);
+  renderCitations("book-grid-citations", books);
+  renderClub("book-grid-club", books);
+  renderResume("book-grid-resume", books);
+  switchTab('accueil');
+  </script>
+
+
+
+
+</body>
+</html>
